@@ -141,6 +141,7 @@
     }
     if (!storage.consumeBooster()) return;
 
+    var ownedBefore = Object.assign({}, storage.getState().collection);
     storage.addCards(ids);
 
     var first = pool.byId[ids[0]];
@@ -168,6 +169,13 @@
       img.src = card.imagePath;
       img.alt = card.name;
       front.appendChild(img);
+
+      if (!ownedBefore[id]) {
+        var badge = document.createElement('span');
+        badge.className = 'card-new';
+        badge.textContent = 'Nouveau';
+        front.appendChild(badge);
+      }
 
       inner.appendChild(back);
       inner.appendChild(front);
@@ -342,7 +350,16 @@
     $('open-booster-btn').addEventListener('click', openBooster);
     $('booster-grid').addEventListener('click', function (event) {
       var cardEl = event.target.closest('.booster-card');
-      if (cardEl) flipCard(cardEl);
+      if (!cardEl) return;
+      if (cardEl.classList.contains('flipped')) {
+        var card = pool.byId[cardEl.dataset.id];
+        if (card) {
+          inspect.open(card,
+            storage.getState().collection[card.id] || 0, card.setName);
+        }
+      } else {
+        flipCard(cardEl);
+      }
     });
     $('reveal-all-btn').addEventListener('click', function () {
       $('booster-grid').querySelectorAll('.booster-card').forEach(flipCard);

@@ -543,11 +543,35 @@ main {
 }
 .booster-front { transform: rotateY(180deg); }
 
-.booster-card.flipped.r-rare .booster-front { box-shadow: 0 0 20px rgba(68, 147, 248, .55); }
-.booster-card.flipped.r-ultra-rare .booster-front { box-shadow: 0 0 22px rgba(176, 131, 240, .6); }
-.booster-card.flipped.r-promotionnelle .booster-front { box-shadow: 0 0 22px rgba(247, 120, 186, .6); }
-.booster-card.flipped.r-se .booster-front { box-shadow: 0 0 22px rgba(227, 179, 65, .65); }
-.booster-card.flipped.r-secret-rare .booster-front { box-shadow: 0 0 26px rgba(240, 197, 82, .75); }
+/* Même contour par rareté que dans la collection */
+.booster-front.r-commune { border-color: var(--r-commune); }
+.booster-front.r-inhabituelle { border-color: var(--r-inhabituelle); }
+.booster-front.r-rare { border-color: var(--r-rare); }
+.booster-front.r-ultra-rare { border-color: var(--r-ultra-rare); }
+.booster-front.r-promotionnelle { border-color: var(--r-promotionnelle); }
+.booster-front.r-se { border-color: var(--r-se); }
+.booster-front.r-secret-rare { border-color: var(--r-secret-rare); }
+
+.card-new {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: linear-gradient(180deg, #ffe07a, #f0b429);
+  color: #3a2600;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, .55);
+  z-index: 1;
+}
+
+.booster-card.flipped .booster-front.r-rare { box-shadow: 0 0 20px rgba(68, 147, 248, .55); }
+.booster-card.flipped .booster-front.r-ultra-rare { box-shadow: 0 0 22px rgba(176, 131, 240, .6); }
+.booster-card.flipped .booster-front.r-promotionnelle { box-shadow: 0 0 22px rgba(247, 120, 186, .6); }
+.booster-card.flipped .booster-front.r-se { box-shadow: 0 0 22px rgba(227, 179, 65, .65); }
+.booster-card.flipped .booster-front.r-secret-rare { box-shadow: 0 0 26px rgba(240, 197, 82, .75); }
 
 .booster-card.flip-pop .booster-card-inner { animation: flipPop .55s cubic-bezier(.2, .7, .3, 1); }
 @keyframes flipPop {
