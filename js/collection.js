@@ -194,7 +194,18 @@
         selected = {};
         render();
       },
-      getSelection: function () { return selectionIds(); }
+      getSelection: function () { return selectionIds(); },
+
+      /* Une copie de chaque carte est conservée : renvoie tous les
+       * exemplaires au-delà du premier, pour chaque carte possédée. */
+      getDuplicateIds: function () {
+        var ids = [];
+        ownedCards().forEach(function (card) {
+          var count = ownedOf(card.id);
+          for (var i = 1; i < count; i++) ids.push(card.id);
+        });
+        return ids;
+      }
     };
   }
 

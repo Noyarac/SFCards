@@ -370,6 +370,19 @@
       updateStatus();
     });
 
+    $('recycle-dupes-btn').addEventListener('click', function () {
+      if (storage.getState().boosters >= storage.MAX_BOOSTERS) {
+        toast('Cap atteint : le recyclage est bloqué jusqu\'à l\'ouverture d\'un booster.');
+        return;
+      }
+      var ids = collection.getDuplicateIds();
+      if (!ids.length) {
+        toast('Aucun doublon à recycler : tu ne gardes qu\'une copie de chaque carte.');
+        return;
+      }
+      requestRecycle(ids);
+    });
+
     setupReset();
     collection.refresh();
     updateStatus();
