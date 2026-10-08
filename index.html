@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SF Cards — Collection</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">SF<span>Cards</span></div>
+  <div class="topbar-status">
+    <div class="timer-pill" id="timer-pill">
+      <span class="dot" id="timer-dot"></span>
+      <span id="timer-text">—</span>
+    </div>
+    <div class="booster-pill" id="booster-pill" title="Boosters non-ouverts">
+      <span class="pack-icon"></span>
+      <span id="booster-count">0</span><span class="max">/3</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-view="boosters">Boosters</button>
+  <button class="tab" data-view="collection">Collection <span class="tab-count" id="collection-count"></span></button>
+</nav>
+
+<main>
+  <section class="view active" id="view-boosters">
+    <div class="booster-slots" id="booster-slots"></div>
+
+    <div class="next-up">
+      <div class="next-label">Prochain booster dans</div>
+      <div class="next-time" id="next-time">—</div>
+      <div class="next-hint" id="next-hint"></div>
+    </div>
+
+    <button class="btn btn-primary btn-big" id="open-booster-btn">Ouvrir un booster</button>
+  </section>
+
+  <section class="view" id="view-collection">
+    <div class="toolbar">
+      <select id="filter-type" class="select" aria-label="Filtrer par type">
+        <option value="">Tous les types</option>
+      </select>
+      <select id="filter-rarity" class="select" aria-label="Filtrer par rareté">
+        <option value="">Toutes les raretés</option>
+      </select>
+      <label class="toggle">
+        <input type="checkbox" id="recycle-toggle">
+        <span>Mode recyclage</span>
+      </label>
+      <span class="owned-count" id="owned-count"></span>
+    </div>
+
+    <div class="recycle-bar hidden" id="recycle-bar">
+      <span id="recycle-summary">Aucune carte sélectionnée</span>
+      <span class="recycle-gain" id="recycle-gain"></span>
+      <span class="recycle-actions">
+        <button class="btn btn-ghost" id="recycle-clear">Tout désélectionner</button>
+        <button class="btn btn-danger" id="recycle-btn" disabled>Recycler</button>
+      </span>
+    </div>
+
+    <div class="card-grid" id="card-grid"></div>
+
+    <div class="empty-state hidden" id="collection-empty">
+      <div class="empty-pack"></div>
+      <p>Aucune carte pour l'instant.</p>
+      <p class="muted">Ouvre ton premier booster&nbsp;!</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <button class="link-danger" id="reset-btn">Réinitialiser la progression</button>
+</footer>
+
+<!-- Overlay : ouverture de booster -->
+<div class="overlay hidden" id="booster-overlay">
+  <div class="booster-panel">
+    <div class="booster-header">
+      <h2 id="booster-title">Booster</h2>
+      <button class="btn btn-ghost" id="reveal-all-btn">Tout révéler</button>
+    </div>
+    <div class="booster-grid" id="booster-grid"></div>
+    <div class="booster-footer">
+      <span class="muted" id="booster-progress">0/10 révélées</span>
+      <button class="btn btn-primary" id="booster-close-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay : inspection d'une carte -->
+<div class="overlay hidden" id="inspect-overlay">
+  <div class="inspect-panel">
+    <div class="inspect-stage" id="inspect-stage">
+      <div class="inspect-card" id="inspect-card">
+        <img id="inspect-img" alt="">
+        <span class="inspect-glare" id="inspect-glare"></span>
+      </div>
+    </div>
+    <aside class="inspect-info">
+      <h2 id="inspect-name">—</h2>
+      <div class="inspect-meta">
+        <span class="rarity-badge" id="inspect-rarity">—</span>
+        <span class="type-badge" id="inspect-type">—</span>
+        <span class="num-badge" id="inspect-number">—</span>
+        <span class="owned-badge" id="inspect-owned"></span>
+      </div>
+      <p class="inspect-desc" id="inspect-desc"></p>
+      <p class="muted inspect-hint">Bouge la souris sur la carte pour l'incliner.</p>
+      <button class="btn btn-primary" id="inspect-close-btn">Fermer</button>
+    </aside>
+  </div>
+</div>
+
+<!-- Confirmation : recyclage -->
+<div class="overlay hidden" id="confirm-overlay">
+  <div class="confirm-panel">
+    <h2>Recycler ces cartes&nbsp;?</h2>
+    <p id="confirm-text"></p>
+    <p class="muted" id="confirm-detail"></p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" id="confirm-cancel">Annuler</button>
+      <button class="btn btn-danger" id="confirm-ok">Recycler</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast hidden" id="toast"></div>
+
+<script src="assets/sets/sets.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/booster.js"></script>
+<script src="js/collection.js"></script>
+<script src="js/inspect.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
